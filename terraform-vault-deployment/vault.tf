@@ -20,6 +20,7 @@ resource "helm_release" "consul" {
   ]
 }
 
+
 resource "helm_release" "vault" {
   depends_on = [helm_release.consul]
 
