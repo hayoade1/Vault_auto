@@ -1,4 +1,15 @@
+terraform {
+  backend "remote" {
+    organization = "HashiCorp-Sam"
+
+    workspaces {
+      name = "infrastructure-gcp-tf-vault-deployment"
+    }
+  }
+}
+
 provider "google" {
+  credentials = file("/Users/sam/.gcloud/gcloudSecretsHashiCorp/sam-gabrail-gcp-demos-8770826913f1.json")
 }
 
 provider "kubernetes" {
