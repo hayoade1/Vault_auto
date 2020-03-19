@@ -27,7 +27,9 @@ variable "machine_type" {
 }
 
 variable "dns_managed_zone" {
+  default = "private-zone"
 }
 
 variable "dns_name" {
+  default = "vault-sam-demo"
 }
