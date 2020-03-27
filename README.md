@@ -24,7 +24,7 @@ You need to do this manually:
 
 ```shell
 export VAULT_ADDR=http://vault.hashidemos.tekanaid.com:8200
-vault operator init -recovery-shares=1 -recovery-threshold=1
+vault operator init -key-shares=1 -key-threshold=1
 vault operator unseal
 vault login
 ```
