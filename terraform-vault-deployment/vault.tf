@@ -10,6 +10,7 @@ resource "kubernetes_namespace" "consul" {
   }
 }
 
+
 resource "helm_release" "consul" {
   name      = "consul"
   chart     = "consul-helm"
