@@ -25,6 +25,7 @@ provider "kubernetes" {
 
 provider "helm" {
   kubernetes {
+    config_path = "config"
     host  = google_container_cluster.kubernetes_cluster.endpoint
     token = data.google_client_config.default.access_token
 
