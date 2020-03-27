@@ -1,1 +1,6 @@
 .terraform
+terraform-vault-deployment/terraform.tfstate
+terraform-vault-deployment/terraform.tfstate.backup
+secrets.md
+terraform-vault-configuration/terraform.tfstate
+terraform-vault-configuration/terraform.tfstate.backup

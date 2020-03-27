@@ -14,6 +14,7 @@ resource "helm_release" "consul" {
   name      = "consul"
   chart     = "consul-helm"
   namespace = kubernetes_namespace.consul.metadata.0.name
+  // version   = "v0.18.0"
 
   values = [
     templatefile("consul/values.tmpl", { replicas = var.initial_node_count })
@@ -27,6 +28,7 @@ resource "helm_release" "vault" {
   name      = "vault"
   chart     = "vault-helm"
   namespace = kubernetes_namespace.vault.metadata.0.name
+  // version   = "v0.4.0"
 
   values = [
     templatefile("vault/values.tmpl", { replicas = var.initial_node_count })

@@ -27,9 +27,9 @@ variable "machine_type" {
 }
 
 variable "dns_managed_zone" {
-  default = "private-zone"
+  default = "public-zone"
 }
 
 variable "dns_name" {
-  default = "vault-sam-demo"
+  default = "vault.hashidemos.tekanaid.com"
 }

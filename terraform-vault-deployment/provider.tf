@@ -1,16 +1,16 @@
-terraform {
-  backend "remote" {
-    organization = "HashiCorp-Sam"
+// terraform {
+//   backend "remote" {
+//     organization = "HashiCorp-Sam"
 
-    workspaces {
-      name = "infrastructure-gcp-tf-vault-deployment"
-    }
-  }
-}
+//     workspaces {
+//       name = "infrastructure-gcp"
+//     }
+//   }
+// }
 
 
 provider "google" {
-  // credentials = file("/Users/sam/.gcloud/gcloudSecretsHashiCorp/sam-gabrail-gcp-demos-8770826913f1.json")
+  credentials = file("/Users/sam/.gcloud/gcloudSecretsHashiCorp/sam-gabrail-gcp-demos-8770826913f1.json")
 }
 
 provider "kubernetes" {
