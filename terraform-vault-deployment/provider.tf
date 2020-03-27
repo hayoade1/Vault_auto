@@ -14,6 +14,7 @@ provider "google" {
 }
 
 provider "kubernetes" {
+  load_config_file = "false"
   host  = google_container_cluster.kubernetes_cluster.endpoint
   token = data.google_client_config.default.access_token
 
