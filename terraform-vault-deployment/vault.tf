@@ -18,7 +18,7 @@ resource "helm_release" "consul" {
   // version   = "v0.18.0"
 
   values = [
-    templatefile("consul/values.tmpl", { replicas = var.initial_node_count })
+    templatefile("consul/values.tmpl", { replicas = var.consul_node_count })
   ]
 }
 
@@ -32,7 +32,7 @@ resource "helm_release" "vault" {
   // version   = "v0.4.0"
 
   values = [
-    templatefile("vault/values.tmpl", { replicas = var.initial_node_count })
+    templatefile("vault/values.tmpl", { replicas = var.vault_node_count })
   ]
 }
 
