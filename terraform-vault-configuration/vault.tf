@@ -46,11 +46,17 @@ resource "vault_auth_backend" "kubernetes" {
   type = "kubernetes"
 }
 
-resource "vault_kubernetes_auth_backend_config" "kubernetes_config" {
-  kubernetes_host    = "https://$KUBERNETES_PORT_443_TCP_ADDR:443"
-  kubernetes_ca_cert = "@/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
-  token_reviewer_jwt = "$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)"
-}
+// resource "vault_kubernetes_auth_backend_config" "kubernetes_config" {
+//   kubernetes_host    = "https://$KUBERNETES_PORT_443_TCP_ADDR:443"
+//   kubernetes_ca_cert = "@/var/run/secrets/kubernetes.io/serviceaccount/ca.crt"
+//   token_reviewer_jwt = "$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)"
+// }
+
+// You could use the above stanza to configure the K8s auth method by providing the proper values or do this manually inside the Vault container:
+// vault write auth/kubernetes/config \
+//         token_reviewer_jwt="$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" \
+//         kubernetes_host="https://$KUBERNETES_PORT_443_TCP_ADDR:443" \
+//         kubernetes_ca_cert=@/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
 
 resource "vault_kubernetes_auth_backend_role" "webblog" {
   backend                          = vault_auth_backend.kubernetes.path
