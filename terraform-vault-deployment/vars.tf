@@ -13,7 +13,7 @@ variable "cluster_name" {
 
 variable "initial_node_count" {
   description = "initial amount of nodes to deploy for the kubernetes cluster"
-  default     = "2"
+  default     = "1"
 }
 
 variable "vault_node_count" {
