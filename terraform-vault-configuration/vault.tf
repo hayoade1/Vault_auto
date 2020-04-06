@@ -110,7 +110,7 @@ resource "vault_database_secret_backend_role" "mongodb-role" {
   backend             = "${vault_mount.db.path}"
   name                = "mongodb-role"
   db_name             = "${vault_database_secret_backend_connection.mongodb.name}"
-  creation_statements = ["{ "db": "admin", "roles": [{ "role": "readWriteAnyDatabase" }, {"role": "read", "db": "foo"}] }"]
+  creation_statements = "{ "db": "admin", "roles": [{ "role": "readWriteAnyDatabase" }, {"role": "read", "db": "foo"}] }"
   default_ttl="10s"
   max_ttl="24h"
 }
