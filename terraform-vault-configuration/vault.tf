@@ -114,3 +114,18 @@ resource "vault_database_secret_backend_role" "mongodb-role" {
   max_ttl             = "86400"
   creation_statements = ["{ \"db\": \"admin\", \"roles\": [{ \"role\": \"readWriteAnyDatabase\" }, {\"role\": \"read\", \"db\": \"foo\"}] }"]
 }
+
+resource "vault_mount" "transit" {
+  path                      = "transit"
+  type                      = "transit"
+  description               = "To Encrypt the webblog"
+  default_lease_ttl_seconds = 3600
+  max_lease_ttl_seconds     = 86400
+}
+
+resource "vault_transit_secret_backend_key" "key" {
+  backend = "${vault_mount.transit.path}"
+  name    = "webblog-key"
+  derived = "true"
+  convergent_encryption = "true"
+}
