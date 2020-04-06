@@ -112,5 +112,5 @@ resource "vault_database_secret_backend_role" "mongodb-role" {
   db_name             = vault_database_secret_backend_connection.mongodb.name
   default_ttl         = "10"
   max_ttl             = "86400"
-  creation_statements = ["{ 'db': 'admin', 'roles': [{ 'role': 'readWriteAnyDatabase' }, {'role': 'read', 'db': 'foo'}] }"]
+  creation_statements = ["{ \"db\": \"admin\", \"roles\": [{ \"role\": \"readWriteAnyDatabase\" }, {\"role\": \"read\", \"db\": \"foo\"}] }"]
 }
