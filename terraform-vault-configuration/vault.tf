@@ -100,7 +100,7 @@ resource "vault_database_secret_backend_connection" "mongodb" {
   name          = "mongodb"
   allowed_roles = ["mongodb-role"]
 
-  mongodbql {
+  mongodb {
     connection_url = "mongodb://${var.DB_USER}:${var.DB_PASSWORD}@${DB_URL}/admin"
     
   }
