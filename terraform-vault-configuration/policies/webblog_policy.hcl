@@ -1,6 +1,6 @@
 path "internal/data/webblog/mongodb" {
   capabilities = ["read"]
 }
-path "mongodb/creds/readonly" {
+path "mongodb/creds/mongodb-role" {
   capabilities = [ "read" ]
 }
