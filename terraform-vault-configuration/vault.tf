@@ -107,10 +107,10 @@ resource "vault_database_secret_backend_connection" "mongodb" {
 }
 
 resource "vault_database_secret_backend_role" "mongodb-role" {
-  backend             = "${vault_mount.db.path}"
+  backend             = vault_mount.db.path
   name                = "mongodb-role"
-  db_name             = "${vault_database_secret_backend_connection.mongodb.name}"
+  db_name             = vault_database_secret_backend_connection.mongodb.name
   default_ttl         = "10s"
   max_ttl             = "24h"
-  creation_statements = "{ "db": "admin", "roles": [{ "role": "readWriteAnyDatabase" }, {"role": "read", "db": "foo"}] }"
+  creation_statements = ['{ "db": "admin", "roles": [{ "role": "readWriteAnyDatabase" }, {"role": "read", "db": "foo"}] }']
 }
