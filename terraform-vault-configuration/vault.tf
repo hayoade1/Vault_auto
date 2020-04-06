@@ -83,8 +83,34 @@ resource "vault_generic_secret" "webblog" {
 
   data_json = <<EOT
 {
-  "username": "root",
-  "password": "GGhJxUpAB23"
+  "username": "${var.DB_USER}",
+  "password": "${var.DB_PASSWORD}"
 }
 EOT
+}
+
+resource "vault_mount" "db" {
+  path = "mongodb"
+  type = "database"
+  description = "Dynamic Secrets Engine for WebBlog MongoDB."
+}
+
+resource "vault_database_secret_backend_connection" "mongodb" {
+  backend       = "${vault_mount.db.path}"
+  name          = "mongodb"
+  allowed_roles = ["mongodb-role"]
+
+  mongodbql {
+    connection_url = "mongodb://${var.DB_USER}:${var.DB_PASSWORD}@${DB_URL}/admin"
+    
+  }
+}
+
+resource "vault_database_secret_backend_role" "mongodb-role" {
+  backend             = "${vault_mount.db.path}"
+  name                = "mongodb-role"
+  db_name             = "${vault_database_secret_backend_connection.mongodb.name}"
+  creation_statements = ["{ "db": "admin", "roles": [{ "role": "readWriteAnyDatabase" }, {"role": "read", "db": "foo"}] }"]
+  default_ttl="10s"
+  max_ttl="24h"
 }
