@@ -10,6 +10,7 @@ resource "google_container_cluster" "kubernetes_cluster" {
 
 resource "google_container_node_pool" "primary_nodepool" {
   name       = var.nodepool_name
+  project    = var.project
   location   = var.location
   cluster    = google_container_cluster.kubernetes_cluster.name
   node_count = var.nodepool_node_count
