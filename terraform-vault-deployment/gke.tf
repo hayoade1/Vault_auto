@@ -30,7 +30,7 @@ resource "google_container_node_pool" "primary_nodepool" {
       DoNotDelete = "True"
     }
 
-    tags = ["DoNotDelete", "SamG"]
+    tags = ["donotdelete", "samg"]
 
   }
 }
