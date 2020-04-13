@@ -1,6 +1,6 @@
 # Infrastructure GCP
 
-This is a project to deploy infrastructure on Google Cloud
+This is a project to deploy Vault backed by Consul on Google Cloud to support the Webblog app. [This is the repo for the Webblog app](https://gitlab.com/public-projects3/web-blog-demo). This is used as part of the [Webblog App blog](https://tekanaid.com/webblog-app-infrastructure-as-code/)
 
 # Before running Terraform
 
