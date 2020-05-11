@@ -579,7 +579,7 @@ connectInject:
   # True if you want to enable connect injection. Set to "-" to inherit from
   # global.enabled.
   # Requires consul-k8s >= 0.10.1.
-  enabled: true
+  enabled: false
   image: null # image for consul-k8s that contains the injector
   default: false # true will inject by default, otherwise requires annotation
 

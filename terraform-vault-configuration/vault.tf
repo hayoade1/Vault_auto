@@ -129,3 +129,52 @@ resource "vault_transit_secret_backend_key" "key" {
   derived = "true"
   convergent_encryption = "true"
 }
+
+// ## PKI
+// # https://learn.hashicorp.com/vault/secrets-management/sm-pki-engine
+// # Create Root CA with TTL of 10 years
+// vault secrets enable -path=pki pki
+// vault secrets tune -max-lease-ttl=87600h pki
+// vault write -field=certificate pki/root/generate/hashidemos common_name="hashidemos.tekanaid.com" \
+//   ttl=876h > configs/pki/CA_cert.crt
+// vault write pki/config/urls \
+//   issuing_certificates="http://127.0.0.1:8200/v1/pki/ca" \
+//   crl_distribution_points="http://127.0.0.1:8200/v1/pki/crl"
+
+// # Create Intermediate CA for one year TTL
+// vault secrets enable -path=pki_int pki
+// vault secrets tune -max-lease-ttl=43800h pki_int
+// vault write -format=json pki_int/intermediate/generate/hashidemos \
+//   common_name="hashidemos.tekanaid.com Intermediate Authority" \
+//   | jq -r '.data.csr' > pki_intermediate.csr
+// vault write -format=json pki/root/sign-intermediate csr=@pki_intermediate.csr \
+//   format=pem_bundle ttl="8760h" \
+//   | jq -r '.data.certificate' > intermediate.cert.pem
+// vault write pki_int/intermediate/set-signed certificate=@intermediate.cert.pem
+
+// # Create a Role
+// vault write pki_int/roles/hashidemos \
+//   allowed_domains="hashidemos.tekanaid.com" \
+//   allow_subdomains=true \
+//   max_ttl="730h"
+
+// # Request Certificates
+// vault write pki_int/issue/hashidemos common_name="webblog.hashidemos.tekanaid.com" ttl="24h"
+
+// # Policies for vault agent
+// # Permits token creation
+// path "auth/token/create" {
+//   capabilities = ["update"]
+// }
+// # Enable secrets engine
+// path "sys/mounts/*" {
+//   capabilities = ["create", "read", "update", "delete", "list"]
+// }
+// # List enabled secrets engine
+// path "sys/mounts" {
+//   capabilities = ["read", "list"]
+// }
+// # Work with pki secrets engine
+// path "pki*" {
+//   capabilities = ["create", "read", "update", "delete", "list", "sudo"]
+// }
