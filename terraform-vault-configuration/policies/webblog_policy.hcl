@@ -4,7 +4,7 @@ path "internal/data/webblog/mongodb" {
 path "mongodb/creds/mongodb-role" {
   capabilities = [ "read" ]
 }
-path "mongodb/creds/mongodb-nomad-role" {
+path "mongodb_nomad/creds/mongodb-nomad-role" {
   capabilities = [ "read" ]
 }
 path "transit/*" {
