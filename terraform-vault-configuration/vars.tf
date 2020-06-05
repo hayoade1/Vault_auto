@@ -9,3 +9,7 @@ variable "DB_PASSWORD" {
 variable "DB_URL" {
   description = "mongodb URL"
 }
+
+variable "DB_URL_NOMAD" {
+  description = "mongodb URL for the nomad cluster for the webblog demo"
+}
