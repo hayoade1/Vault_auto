@@ -202,6 +202,6 @@ resource "vault_azure_secret_backend_role" "jenkins" {
 
   azure_roles {
     role_name = "Contributor"
-    scope =  "/subscriptions/${var.subscription_id}/resourceGroups/${azurerm_resource_group.myresourcegroup.name}"
+    scope =  "/subscriptions/${var.subscription_id}/resourceGroups/samg-myresourcegroup"
   }
 }
