@@ -4,22 +4,21 @@ terraform {
       source = "hashicorp/vault"
       version = "2.15.0"
     }
-    azuread = {
-      source = "hashicorp/azuread"
-      version = "1.0.0"
+    azurerm = {
+      source = "hashicorp/azurerm"
+      version = "2.36.0"
     }
   }
+}
+
+provider "azurerm" {
+  # Configuration options
+  features = {}
 }
 
 provider "vault" {
   # Configuration options
 }
-
-provider "azuread" {
-  # Configuration options
-  features {}
-}
-
 
 resource "vault_auth_backend" "example" {
   type = "userpass"
