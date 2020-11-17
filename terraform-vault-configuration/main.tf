@@ -181,10 +181,31 @@ resource "vault_transit_secret_backend_key" "key" {
   convergent_encryption = "true"
 }
 
+locals {
+  se-region = "AMER - Canada"
+  owner     = "sam.gabrail"
+  purpose   = "demo for end-to-end infrastructure and application deployments"
+  ttl       = "-1"
+  terraform = "true"
+}
+
+locals {
+  # Common tags to be assigned to all resources
+  common_tags = {
+    se-region = local.se-region
+    owner     = local.owner
+    purpose   = local.purpose
+    ttl       = local.ttl
+    terraform = local.terraform
+  }
+}
+
 # Azure Secrets Engine Configuration
 resource "azurerm_resource_group" "myresourcegroup" {
   name     = "${var.prefix}-jenkins"
   location = var.location
+
+  tags = local.common_tags
 }
 
 resource "vault_azure_secret_backend" "azure" {
