@@ -218,8 +218,8 @@ resource "vault_azure_secret_backend" "azure" {
 resource "vault_azure_secret_backend_role" "jenkins" {
   backend                     = vault_azure_secret_backend.azure.path
   role                        = "jenkins"
-  ttl                         = "1h"
-  max_ttl                     = "24h"
+  ttl                         = "24h"
+  max_ttl                     = "48h"
 
   azure_roles {
     role_name = "Contributor"
