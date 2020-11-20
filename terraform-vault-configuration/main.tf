@@ -201,28 +201,28 @@ locals {
 }
 
 # Azure Secrets Engine Configuration
-// resource "azurerm_resource_group" "myresourcegroup" {
-//   name     = "${var.prefix}-jenkins"
-//   location = var.location
+resource "azurerm_resource_group" "myresourcegroup" {
+  name     = "${var.prefix}-jenkins"
+  location = var.location
 
-//   tags = local.common_tags
-// }
+  tags = local.common_tags
+}
 
-// resource "vault_azure_secret_backend" "azure" {
-//   subscription_id = var.subscription_id
-//   tenant_id = var.tenant_id
-//   client_secret = var.client_secret
-//   client_id = var.client_id
-// }
+resource "vault_azure_secret_backend" "azure" {
+  subscription_id = var.subscription_id
+  tenant_id = var.tenant_id
+  client_secret = var.client_secret
+  client_id = var.client_id
+}
 
-// resource "vault_azure_secret_backend_role" "jenkins" {
-//   backend                     = vault_azure_secret_backend.azure.path
-//   role                        = "jenkins"
-//   ttl                         = "24h"
-//   max_ttl                     = "48h"
+resource "vault_azure_secret_backend_role" "jenkins" {
+  backend                     = vault_azure_secret_backend.azure.path
+  role                        = "jenkins"
+  ttl                         = "24h"
+  max_ttl                     = "48h"
 
-//   azure_roles {
-//     role_name = "Contributor"
-//     scope =  "/subscriptions/${var.subscription_id}/resourceGroups/${azurerm_resource_group.myresourcegroup.name}"
-//   }
-// }
+  azure_roles {
+    role_name = "Contributor"
+    scope =  "/subscriptions/${var.subscription_id}/resourceGroups/${azurerm_resource_group.myresourcegroup.name}"
+  }
+}
