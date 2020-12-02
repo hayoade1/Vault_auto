@@ -5,3 +5,7 @@ path "kv/data/pipeline-secrets" {
 path "kv/pipeline-secrets" {
   policy = "read"
 }
+
+path "azure/*" {
+  capabilities = [ "read" ]
+}
