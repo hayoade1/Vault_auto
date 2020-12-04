@@ -12,3 +12,6 @@ path "auth/approle/role/webblog-approle/secret-id" {
 path "internal/data/tfc" {
   capabilities = ["read"]
 }
+path "internal/data/webblog/mongodb" {
+  capabilities = ["read"]
+}
