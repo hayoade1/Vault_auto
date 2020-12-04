@@ -14,6 +14,10 @@ variable "DB_URL_NOMAD" {
   description = "mongodb URL for the nomad cluster for the webblog demo"
 }
 
+variable "DB_URL_AZURE" {
+  description = "mongodb URL for the webblog demo on Azure for end-to-end deployment"
+}
+
 variable "subscription_id" {
   description = "Azure subscription_id"
 }

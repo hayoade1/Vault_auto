@@ -126,6 +126,12 @@ resource "vault_mount" "db_nomad" {
   description = "Dynamic Secrets Engine for WebBlog MongoDB on Nomad."
 }
 
+resource "vault_mount" "db_azure" {
+  path = "mongodb_azure"
+  type = "database"
+  description = "Dynamic Secrets Engine for WebBlog MongoDB on Azure."
+}
+
 resource "vault_database_secret_backend_connection" "mongodb" {
   backend       = vault_mount.db.path
   name          = "mongodb"
@@ -148,6 +154,17 @@ resource "vault_database_secret_backend_connection" "mongodb_nomad" {
   }
 }
 
+resource "vault_database_secret_backend_connection" "mongodb_azure" {
+  backend       = vault_mount.db_azure.path
+  name          = "mongodb_azure"
+  allowed_roles = ["mongodb-azure-role"]
+
+  mongodb {
+    connection_url = "mongodb://${var.DB_USER}:${var.DB_PASSWORD}@${var.DB_URL_AZURE}/admin"
+    
+  }
+}
+
 resource "vault_database_secret_backend_role" "mongodb-role" {
   backend             = vault_mount.db.path
   name                = "mongodb-role"
@@ -161,6 +178,15 @@ resource "vault_database_secret_backend_role" "mongodb-nomad-role" {
   backend             = vault_mount.db_nomad.path
   name                = "mongodb-nomad-role"
   db_name             = vault_database_secret_backend_connection.mongodb_nomad.name
+  default_ttl         = "10"
+  max_ttl             = "86400"
+  creation_statements = ["{ \"db\": \"admin\", \"roles\": [{ \"role\": \"readWriteAnyDatabase\" }, {\"role\": \"read\", \"db\": \"foo\"}] }"]
+}
+
+resource "vault_database_secret_backend_role" "mongodb-azure-role" {
+  backend             = vault_mount.db_azure.path
+  name                = "mongodb-azure-role"
+  db_name             = vault_database_secret_backend_connection.mongodb_azure.name
   default_ttl         = "10"
   max_ttl             = "86400"
   creation_statements = ["{ \"db\": \"admin\", \"roles\": [{ \"role\": \"readWriteAnyDatabase\" }, {\"role\": \"read\", \"db\": \"foo\"}] }"]
