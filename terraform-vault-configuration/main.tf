@@ -211,7 +211,7 @@ locals {
   se-region = "AMER - Canada"
   owner     = "sam.gabrail"
   purpose   = "demo for end-to-end infrastructure and application deployments"
-  ttl       = "-1"
+  ttl       = "720"
   terraform = "true"
 }
 
