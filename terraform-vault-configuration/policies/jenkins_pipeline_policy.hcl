@@ -7,7 +7,7 @@ path "auth/approle/role/webblog-approle/role-id" {
 path "auth/approle/role/webblog-approle/secret-id" {
   policy = "write"
   min_wrapping_ttl   = "100s"
-  max_wrapping_ttl   = "300s"
+  max_wrapping_ttl   = "1000s"
 }
 path "internal/data/tfc" {
   capabilities = ["read"]

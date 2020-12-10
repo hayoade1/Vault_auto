@@ -275,8 +275,6 @@ resource "vault_approle_auth_backend_role" "jenkins_approle" {
   role_name          = "jenkins-approle"
   //secret_id_num_uses = "0"  means unlimited 
   secret_id_num_uses = "0" 
-  // secret_id_ttl      = "300"
-  // token_ttl          = "1800"
   token_policies     = ["default", "jenkins-policy"]
 }
 
