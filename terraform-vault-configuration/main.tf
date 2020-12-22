@@ -256,11 +256,6 @@ resource "vault_azure_secret_backend_role" "jenkins" {
 
 # Jenkins Secure Introduction
 
-resource "vault_policy" "pipeline_policy" {
-  name = "pipeline-policy"
-  policy = file("policies/jenkins_pipeline_policy.hcl")
-}
-
 resource "vault_policy" "jenkins_policy" {
   name = "jenkins-policy"
   policy = file("policies/jenkins_policy.hcl")
@@ -277,6 +272,11 @@ resource "vault_approle_auth_backend_role" "jenkins_approle" {
   //secret_id_num_uses = "0"  means unlimited 
   secret_id_num_uses = "0" 
   token_policies     = ["default", "jenkins-policy"]
+}
+
+resource "vault_policy" "pipeline_policy" {
+  name = "pipeline-policy"
+  policy = file("policies/jenkins_pipeline_policy.hcl")
 }
 
 resource "vault_auth_backend" "pipeline_access" {
