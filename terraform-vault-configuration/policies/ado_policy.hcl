@@ -1,11 +1,11 @@
 ### ado-pipeline.hcl
 # Read-only permission on 'internal/data/azure*' path
-path "internal/data/azure/*" {
+path "internal/data/azure" {
   capabilities = [ "read" ]
 }
 
 # Read-only permission on 'internal/azure*' path
-path "internal/azure/*" {
+path "internal/azure" {
   capabilities = [ "read" ]
 }
 
