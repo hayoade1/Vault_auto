@@ -104,4 +104,4 @@ resource "vault_azure_secret_backend_role" "jenkins" {
     scope =  "/subscriptions/${var.subscription_id}/resourceGroups/${azurerm_resource_group.myresourcegroup.name}"
   }
 }
-
+//
