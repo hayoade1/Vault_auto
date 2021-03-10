@@ -46,7 +46,7 @@ resource "vault_policy" "operations_policy" {
 resource "vault_mount" "developers" {
   path        = "developers"
   type        = "kv-v2"
-  description = "KV2 Secrets Engine for Developers."
+  description = "KV2 Secrets Engine for Developers"
 }
 
 resource "vault_mount" "operations" {
