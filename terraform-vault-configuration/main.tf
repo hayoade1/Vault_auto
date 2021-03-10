@@ -43,7 +43,7 @@ resource "vault_policy" "operations_policy" {
 }
 
 resource "vault_policy" "ado_policy" {
-  name   = "ado_policy"
+  name   = "ado_policy1"
   policy = file("policies/ado_policy.hcl")
 }
 
